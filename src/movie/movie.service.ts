@@ -11,6 +11,7 @@ import {Prisma} from '@prisma/client'
 @Injectable()
 export class MovieService {
     constructor(@Inject(CACHE_MANAGER) private cacheService: Cache, private readonly movieRepository: MovieRepository){}
+    private readonly domainServer = "https://yoke-qrm.onrender.com/movie";
     
     async createMovies(): Promise<IApiResponse<number | string>>{
         try{
