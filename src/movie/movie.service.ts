@@ -11,8 +11,8 @@ import {Prisma} from '@prisma/client'
 @Injectable()
 export class MovieService {
     constructor(@Inject(CACHE_MANAGER) private cacheService: Cache, private readonly movieRepository: MovieRepository){}
-    private readonly domainServer = "https://yoke-qrm.onrender.com/movie";
-    
+    private readonly qrViewBaseUrl = "https://63e85e028dc47b2da6ae3756--yoke-bonaventure.netlify.app";
+
     async createMovies(): Promise<IApiResponse<number | string>>{
         try{
             const moviesArray = {data: movies.map((movie) => { delete movie.images; return movie}) as Prisma.MovieCreateManyInput}
@@ -51,7 +51,7 @@ export class MovieService {
     
     async getQRCode(movieUrl: string): Promise<IApiResponse<string>> {
         const randomMovieLimit = Math.floor(Math.random() * 10);
-        const url = movieUrl + "/"+randomMovieLimit;
+        const url = this.qrViewBaseUrl + "/movies/"+randomMovieLimit;
         try{
             const cachedQRCode = await this.cacheService.get(process.env.QRCODE_CACHE_KEY);
             if(cachedQRCode){
