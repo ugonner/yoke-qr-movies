@@ -41,9 +41,9 @@ export class MovieService {
                 return ApiResponse.success<IMovie[]>(randomMovies, 200, "MOVIES GOT");
             }
             
-            return ApiResponse.success<IMovie[]>([], 400, "orcode expired, rescan");
+            return ApiResponse.success<IMovie[]>([], 400, "Ewee, orcode expired, rescan");
         }catch(err){
-            return ApiResponse.fail<string>(err.message, 400, "orcode expired, rescan");
+            return ApiResponse.fail<string>(err.message, 400, "Ewoo, orcode expired, rescan");
         }
     }
 
